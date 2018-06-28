@@ -18,7 +18,6 @@
 		41A5D87120E49B05001F81E9 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D86F20E49B05001F81E9 /* IAPHelper.swift */; };
 		41A5D87220E49B05001F81E9 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87020E49B05001F81E9 /* MasterViewController.swift */; };
 		41A5D87420E49B16001F81E9 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87320E49B16001F81E9 /* ProductCell.swift */; };
-		41A5D87620E49B25001F81E9 /* Products.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87520E49B25001F81E9 /* Products.swift */; };
 		41A5D87920E49D34001F81E9 /* StoreKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 41A5D87820E49D34001F81E9 /* StoreKit.framework */; };
 /* End PBXBuildFile section */
 
@@ -57,7 +56,6 @@
 		41A5D86F20E49B05001F81E9 /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		41A5D87020E49B05001F81E9 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		41A5D87320E49B16001F81E9 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
-		41A5D87520E49B25001F81E9 /* Products.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Products.swift; sourceTree = "<group>"; };
 		41A5D87820E49D34001F81E9 /* StoreKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = StoreKit.framework; path = System/Library/Frameworks/StoreKit.framework; sourceTree = SDKROOT; };
 /* End PBXFileReference section */
 
@@ -111,7 +109,6 @@
 		41A5D83320E486BA001F81E9 /* IAP_TEST */ = {
 			isa = PBXGroup;
 			children = (
-				41A5D87520E49B25001F81E9 /* Products.swift */,
 				41A5D86F20E49B05001F81E9 /* IAPHelper.swift */,
 				41A5D87020E49B05001F81E9 /* MasterViewController.swift */,
 				41A5D86D20E4889D001F81E9 /* DetailViewController.swift */,
@@ -288,7 +285,6 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				41A5D87620E49B25001F81E9 /* Products.swift in Sources */,
 				41A5D83720E486BA001F81E9 /* ViewController.swift in Sources */,
 				41A5D87120E49B05001F81E9 /* IAPHelper.swift in Sources */,
 				41A5D87220E49B05001F81E9 /* MasterViewController.swift in Sources */,

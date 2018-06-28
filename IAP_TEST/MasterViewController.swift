@@ -37,7 +37,7 @@ class MasterViewController: UITableViewController {
       
       let product = products[(indexPath as NSIndexPath).row]
       
-      return Products.store.isProductPurchased(product.productIdentifier)
+      return IAPHelper.shared.isProductPurchased(product.productIdentifier)
     }
     
     return true
@@ -49,7 +49,7 @@ class MasterViewController: UITableViewController {
       
       let product = products[(indexPath as NSIndexPath).row]
       
-      if let name = resourceNameForProductIdentifier(product.productIdentifier),
+      if let name = IAPHelper.shared.resourceNameForProductIdentifier(product.productIdentifier),
              let detailViewController = segue.destination as? DetailViewController {
         let image = UIImage(named: name)
         detailViewController.image = image
@@ -87,7 +87,7 @@ class MasterViewController: UITableViewController {
     
     tableView.reloadData()
     
-    Products.store.requestProducts{success, products in
+    IAPHelper.shared.requestProducts{success, products in
       if success {
         self.products = products!
         
@@ -99,7 +99,7 @@ class MasterViewController: UITableViewController {
   }
   
     @objc func restoreTapped(_ sender: AnyObject) {
-    Products.store.restorePurchases()
+    IAPHelper.shared.restorePurchases()
   }
 
     @objc func handlePurchaseNotification(_ notification: Notification) {
@@ -132,9 +132,8 @@ extension MasterViewController {
     
     cell.product = product
     cell.buyButtonHandler = { product in
-      Products.store.buyProduct(product)
+        IAPHelper.shared.buyProduct(product)
     }
-    
     return cell
   }
 }

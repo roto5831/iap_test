@@ -27,15 +27,20 @@ public typealias ProductsRequestCompletionHandler = (_ success: Bool, _ products
 
 open class IAPHelper : NSObject  {
   
+  static let shared = IAPHelper()
   static let IAPHelperPurchaseNotification = "IAPHelperPurchaseNotification"
   fileprivate let productIdentifiers: Set<ProductIdentifier>
   fileprivate var purchasedProductIdentifiers = Set<ProductIdentifier>()
   fileprivate var productsRequest: SKProductsRequest?
   fileprivate var productsRequestCompletionHandler: ProductsRequestCompletionHandler?
 
-  public init(productIds: Set<ProductIdentifier>) {
-    productIdentifiers = productIds
-    for productIdentifier in productIds {
+  public init(productIds: Set<ProductIdentifier>? = nil) {
+    if let productIds = productIds{
+        self.productIdentifiers = productIds
+    }else{
+        self.productIdentifiers = IAPHelper.getProductIdentifiers()
+    }
+    for productIdentifier in self.productIdentifiers {
       let purchased = UserDefaults.standard.bool(forKey: productIdentifier)
       if purchased {
         purchasedProductIdentifiers.insert(productIdentifier)
@@ -45,7 +50,6 @@ open class IAPHelper : NSObject  {
       }
     }
     super.init()
-    SKPaymentQueue.default().add(self)
   }
   
 }
@@ -53,7 +57,16 @@ open class IAPHelper : NSObject  {
 // MARK: - StoreKit API
 
 extension IAPHelper {
-
+    
+  public static func getProductIdentifiers() -> Set<ProductIdentifier>{
+    //TODO サーバーから取得
+    return ["jp.co.ixit.iap.test.consumable"]
+  }
+    
+  public func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
+    return productIdentifier.components(separatedBy: ".").last
+  }
+    
   public func requestProducts(completionHandler: @escaping ProductsRequestCompletionHandler) {
     productsRequest?.cancel()
     productsRequestCompletionHandler = completionHandler
@@ -150,12 +163,11 @@ extension IAPHelper: SKPaymentTransactionObserver {
  
   private func fail(transaction: SKPaymentTransaction) {
     print("fail...")
-    if let transactionError = transaction.error as? NSError {
+    if let transactionError = transaction.error as NSError? {
       if transactionError.code != SKError.paymentCancelled.rawValue {
-        print("Transaction Error: \(transaction.error?.localizedDescription)")
+        print("Transaction Error: \(String(describing: transaction.error?.localizedDescription))")
       }
     }
- 
     SKPaymentQueue.default().finishTransaction(transaction)
   }
  
