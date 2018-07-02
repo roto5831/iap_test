@@ -35,7 +35,11 @@ open class IAPHelper : NSObject  {
 extension IAPHelper {
     public static func getProductIdentifiers() -> Set<ProductIdentifier>{
         //TODO サーバーから取得
-        return ["jp.co.ixit.iap.test.consumable"]
+        return [
+            "jp.co.ixit.iap.test.consumable",
+            "jp.co.ixit.iap.test.sub.weekly",
+            "jp.co.ixit.iap.test.sub.monthly"
+        ]
     }
 
     public func resourceNameForProductIdentifier(_ productIdentifier: String) -> String? {
