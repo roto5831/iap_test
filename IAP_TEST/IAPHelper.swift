@@ -7,6 +7,7 @@ open class IAPHelper : NSObject  {
     
     static let shared = IAPHelper()
     static let IAPHelperPurchaseNotification = "IAPHelperPurchaseNotification"
+    static let IAPHelperPurchaseFailNotification = "IAPHelperPurchaseFailNotification"
     fileprivate let productIdentifiers: Set<ProductIdentifier>
     fileprivate var purchasedProductIdentifiers = Set<ProductIdentifier>()
     fileprivate var productsRequest: SKProductsRequest?
@@ -165,6 +166,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
         if let transactionError = transaction.error as NSError? {
           if transactionError.code != SKError.paymentCancelled.rawValue {
             print("Transaction Error: \(String(describing: transaction.error?.localizedDescription))")
+            deliverPurchaseFailNotificationFor(error: transaction.error)
           }
         }
         SKPaymentQueue.default().finishTransaction(transaction)
@@ -177,5 +179,9 @@ extension IAPHelper: SKPaymentTransactionObserver {
         UserDefaults.standard.set(true, forKey: identifier)
         UserDefaults.standard.synchronize()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: identifier)
-        }
     }
+    
+    private func deliverPurchaseFailNotificationFor(error: Error?) {
+        NotificationCenter.default.post(name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseFailNotification), object: error)
+    }
+}

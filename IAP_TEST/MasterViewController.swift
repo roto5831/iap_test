@@ -74,6 +74,9 @@ class MasterViewController: UITableViewController {
     NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.handlePurchaseNotification(_:)),
                                                                name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
                                                              object: nil)
+    NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.handlePurchaseFailNotification(_:)),
+                                           name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseFailNotification),
+                                           object: nil)
   }
   
   override func viewDidAppear(_ animated: Bool) {
@@ -103,14 +106,20 @@ class MasterViewController: UITableViewController {
   }
 
     @objc func handlePurchaseNotification(_ notification: Notification) {
-    guard let productID = notification.object as? String else { return }
-    
-    for (index, product) in products.enumerated() {
-      guard product.productIdentifier == productID else { continue }
-      
-      tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        guard let productID = notification.object as? String else { return }
+        
+        for (index, product) in products.enumerated() {
+          guard product.productIdentifier == productID else { continue }
+          
+          tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+        }
     }
-  }
+    
+    @objc func handlePurchaseFailNotification(_ notification: Notification) {
+        guard let error = notification.object as? Error else { return }
+        let alertCtr = SimpleAlertHelper().alert(message: error.localizedDescription, title: "error", delegate: self)
+        self.present(alertCtr!, animated: false, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -136,4 +145,10 @@ extension MasterViewController {
     }
     return cell
   }
+}
+
+// MARK: - SimpleAlertHelperDelegate
+extension MasterViewController: SimpleAlertHelperDelegate {
+    func didTapOKButton() {
+    }
 }
