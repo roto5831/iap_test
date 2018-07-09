@@ -7,6 +7,7 @@
 //
 
 import Foundation
+//iTunes Connectからアプリ毎に発行
 private let itcAccountSecret = "YOUR_ACCOUNT_SECRET"
 
 public enum Result<T> {
@@ -64,7 +65,17 @@ public class ReceiptHelper {
             "password": itcAccountSecret
         ]
         let bodyData = try! JSONSerialization.data(withJSONObject: body, options: [])
-        
+        /*
+         本番と開発とで送信する場所が違うのでレシートを本番環境へ送信する際には実装に工夫が必要
+            戻り値を確認
+            Codeが"0"の場合は、成功処理へ
+            Codeが"21007"の場合は、サンドボックス環境へ送信する
+                戻り値を確認
+                Codeが"0"の場合は、成功処理へ
+                Codeが上記以外の場合は、エラー処理へ
+            Codeが上記以外の場合は、エラー処理へ
+         参考：http://developer.wonderpla.net/entry/blog/engineer/ios_in-app-purchase/
+         */
         let url = URL(string: "https://sandbox.itunes.apple.com/verifyReceipt")!
         var request = URLRequest(url: url)
         request.httpMethod = "POST"

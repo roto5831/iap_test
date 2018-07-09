@@ -116,9 +116,6 @@ class MasterViewController: UITableViewController {
     }
     
     @objc func handlePurchaseFailNotification(_ notification: Notification) {
-        guard let error = notification.object as? Error else { return }
-        let alertCtr = SimpleAlertHelper().alert(message: error.localizedDescription, title: "error", delegate: self)
-        self.present(alertCtr!, animated: false, completion: nil)
     }
 }
 

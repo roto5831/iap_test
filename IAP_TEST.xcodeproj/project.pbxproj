@@ -22,6 +22,7 @@
 		41A5D87B20E4E3E6001F81E9 /* ReceiptHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87A20E4E3E6001F81E9 /* ReceiptHelper.swift */; };
 		41A5D87D20E4E4D5001F81E9 /* PaidSubscription.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87C20E4E4D5001F81E9 /* PaidSubscription.swift */; };
 		41A5D87F20E4E53A001F81E9 /* Session.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87E20E4E53A001F81E9 /* Session.swift */; };
+		41D73C8320F3415600531B0A /* SimpleAlertHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41D73C8220F3415600531B0A /* SimpleAlertHelper.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -63,6 +64,7 @@
 		41A5D87A20E4E3E6001F81E9 /* ReceiptHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReceiptHelper.swift; sourceTree = "<group>"; };
 		41A5D87C20E4E4D5001F81E9 /* PaidSubscription.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaidSubscription.swift; sourceTree = "<group>"; };
 		41A5D87E20E4E53A001F81E9 /* Session.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Session.swift; sourceTree = "<group>"; };
+		41D73C8220F3415600531B0A /* SimpleAlertHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SimpleAlertHelper.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -128,6 +130,7 @@
 				41A5D87A20E4E3E6001F81E9 /* ReceiptHelper.swift */,
 				41A5D87C20E4E4D5001F81E9 /* PaidSubscription.swift */,
 				41A5D87E20E4E53A001F81E9 /* Session.swift */,
+				41D73C8220F3415600531B0A /* SimpleAlertHelper.swift */,
 			);
 			path = IAP_TEST;
 			sourceTree = "<group>";
@@ -298,6 +301,7 @@
 				41A5D87120E49B05001F81E9 /* IAPHelper.swift in Sources */,
 				41A5D87220E49B05001F81E9 /* MasterViewController.swift in Sources */,
 				41A5D87B20E4E3E6001F81E9 /* ReceiptHelper.swift in Sources */,
+				41D73C8320F3415600531B0A /* SimpleAlertHelper.swift in Sources */,
 				41A5D87D20E4E4D5001F81E9 /* PaidSubscription.swift in Sources */,
 				41A5D87420E49B16001F81E9 /* ProductCell.swift in Sources */,
 				41A5D83520E486BA001F81E9 /* AppDelegate.swift in Sources */,

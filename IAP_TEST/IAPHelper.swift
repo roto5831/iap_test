@@ -149,7 +149,6 @@ extension IAPHelper: SKPaymentTransactionObserver {
             if result {
                 SKPaymentQueue.default().finishTransaction(transaction)
             }else{
-                //TODO alert
             }
         }
     }
