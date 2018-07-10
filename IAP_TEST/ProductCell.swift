@@ -41,7 +41,7 @@ class ProductCell: UITableViewCell {
      
       textLabel?.text = product.localizedTitle
      
-      if IAPHelper.shared.isProductPurchased(product.productIdentifier) {
+      if IAPHelper.shared.isProductPurchasedForSubscribe(product.productIdentifier) {
         accessoryType = .checkmark
         accessoryView = nil
         detailTextLabel?.text = ""

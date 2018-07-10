@@ -74,11 +74,14 @@ extension IAPHelper {
         SKPaymentQueue.default().add(payment)
     }
     
-    /// 商品を購入したかどうか
+    /// 購読型の商品を購入したかどうか
     ///
     /// - Parameter productIdentifier:
     /// - Returns:
-    public func isProductPurchased(_ productIdentifier: ProductIdentifier) -> Bool {
+    public func isProductPurchasedForSubscribe(_ productIdentifier: ProductIdentifier) -> Bool {
+        guard !productIdentifier.contains("consumable") else{
+            return false
+        }
         return purchasedProductIdentifiers.contains(productIdentifier)
     }
 

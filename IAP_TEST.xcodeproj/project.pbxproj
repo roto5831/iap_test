@@ -14,7 +14,6 @@
 		41A5D84A20E486BB001F81E9 /* IAP_TESTTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D84920E486BB001F81E9 /* IAP_TESTTests.swift */; };
 		41A5D85520E486BB001F81E9 /* IAP_TESTUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D85420E486BB001F81E9 /* IAP_TESTUITests.swift */; };
 		41A5D86420E487F9001F81E9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 41A5D86220E487F9001F81E9 /* Main.storyboard */; };
-		41A5D86E20E4889E001F81E9 /* DetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D86D20E4889D001F81E9 /* DetailViewController.swift */; };
 		41A5D87120E49B05001F81E9 /* IAPHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D86F20E49B05001F81E9 /* IAPHelper.swift */; };
 		41A5D87220E49B05001F81E9 /* MasterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87020E49B05001F81E9 /* MasterViewController.swift */; };
 		41A5D87420E49B16001F81E9 /* ProductCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 41A5D87320E49B16001F81E9 /* ProductCell.swift */; };
@@ -56,7 +55,6 @@
 		41A5D85420E486BB001F81E9 /* IAP_TESTUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = IAP_TESTUITests.swift; sourceTree = "<group>"; };
 		41A5D85620E486BB001F81E9 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		41A5D86320E487F9001F81E9 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
-		41A5D86D20E4889D001F81E9 /* DetailViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DetailViewController.swift; sourceTree = "<group>"; };
 		41A5D86F20E49B05001F81E9 /* IAPHelper.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = IAPHelper.swift; sourceTree = "<group>"; };
 		41A5D87020E49B05001F81E9 /* MasterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MasterViewController.swift; sourceTree = "<group>"; };
 		41A5D87320E49B16001F81E9 /* ProductCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ProductCell.swift; sourceTree = "<group>"; };
@@ -119,7 +117,6 @@
 			children = (
 				41A5D86F20E49B05001F81E9 /* IAPHelper.swift */,
 				41A5D87020E49B05001F81E9 /* MasterViewController.swift */,
-				41A5D86D20E4889D001F81E9 /* DetailViewController.swift */,
 				41A5D87320E49B16001F81E9 /* ProductCell.swift */,
 				41A5D86220E487F9001F81E9 /* Main.storyboard */,
 				41A5D83420E486BA001F81E9 /* AppDelegate.swift */,
@@ -305,7 +302,6 @@
 				41A5D87D20E4E4D5001F81E9 /* PaidSubscription.swift in Sources */,
 				41A5D87420E49B16001F81E9 /* ProductCell.swift in Sources */,
 				41A5D83520E486BA001F81E9 /* AppDelegate.swift in Sources */,
-				41A5D86E20E4889E001F81E9 /* DetailViewController.swift in Sources */,
 				41A5D87F20E4E53A001F81E9 /* Session.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
