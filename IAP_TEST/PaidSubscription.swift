@@ -9,28 +9,12 @@ private let dateFormatter: DateFormatter = {
 
 public struct PaidSubscription {
     
-    public enum Level {
-        case one
-        case all
-        
-        init?(productId: String) {
-            if productId.contains("oneaweek") {
-                self = .one
-            } else if productId.contains("allaccess") {
-                self = .all
-            } else {
-                return nil
-            }
-        }
-    }
-    
     public let productId: String
     public let purchaseDate: Date
     public let expiresDate: Date
-    public let level: Level
     
+    /// 現在の日付が購入した日付と失効日の間かどうか
     public var isActive: Bool {
-        // is current date between purchaseDate and expiresDate?
         return (purchaseDate...expiresDate).contains(Date())
     }
     
@@ -48,6 +32,5 @@ public struct PaidSubscription {
         self.productId = productId
         self.purchaseDate = purchaseDate
         self.expiresDate = expiresDate
-        self.level = Level(productId: productId) ?? .all
     }
 }

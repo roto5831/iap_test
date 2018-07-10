@@ -8,7 +8,7 @@
 
 import Foundation
 //iTunes Connectからアプリ毎に発行
-private let itcAccountSecret = "YOUR_ACCOUNT_SECRET"
+private let itcAccountSecret = "95a2b9bcba974ec98ae04d68336b9517"
 
 public enum Result<T> {
     case failure(ReceiptError)
@@ -25,7 +25,9 @@ public enum ReceiptError: Error {
     case noActiveSubscription
     case other(Error)
 }
-
+/// レシートお助けマン
+/// TODO upload処理はサーバーサイドで実装
+/// 検証終了後、アプリに課金コンテンツを反映させるクラスを持たせても良いかも
 public class ReceiptHelper {
     
     public static let shared = ReceiptHelper()
@@ -45,6 +47,9 @@ public class ReceiptHelper {
         }
     }
     
+    /// レシートをロードする
+    ///
+    /// - Returns:
     public func loadReceipt() -> Data? {
         guard let url = Bundle.main.appStoreReceiptURL else {
             return nil

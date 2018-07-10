@@ -26,7 +26,6 @@ public struct Session {
                     subscriptions.append(paidSubscription)
                 }
             }
-            
             paidSubscriptions = subscriptions
         } else {
             paidSubscriptions = []
