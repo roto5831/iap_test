@@ -31,20 +31,11 @@ public enum ReceiptError: Error {
 public class ReceiptHelper {
     
     public static let shared = ReceiptHelper()
-    let simulatedStartDate: Date
     
+    /// レシート送信毎に発行されるセッション　いらなかったら削除
     private var sessions = [SessionId: Session]()
     
     init() {
-        let persistedDateKey = "RWSSimulatedStartDate"
-        if let persistedDate = UserDefaults.standard.object(forKey: persistedDateKey) as? Date {
-            simulatedStartDate = persistedDate
-        } else {
-            let date = Date().addingTimeInterval(-30) // 30 second difference to account for server/client drift.
-            UserDefaults.standard.set(date, forKey: "RWSSimulatedStartDate")
-            
-            simulatedStartDate = date
-        }
     }
     
     /// レシートをロードする
@@ -91,6 +82,7 @@ public class ReceiptHelper {
             } else if let responseData = responseData {
                 let json = try! JSONSerialization.jsonObject(with: responseData, options: []) as! Dictionary<String, Any>
                 print(json)
+                //ここら辺はレシート検証とコンテンツの解放を別で定義するかどうかによって変わってくる
                 let session = Session(receiptData: data, parsedReceipt: json)
                 self.sessions[session.id] = session
                 let result = (sessionId: session.id, currentSubscription: session.currentSubscription)

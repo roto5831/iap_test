@@ -51,7 +51,6 @@ class MasterViewController: UITableViewController {
   
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
-
         reload()
     }
   
@@ -80,8 +79,9 @@ class MasterViewController: UITableViewController {
         
         for (index, product) in products.enumerated() {
           guard product.productIdentifier == productID else { continue }
-          
-          tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+            DispatchQueue.main.async {
+                self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+            }
         }
     }
     

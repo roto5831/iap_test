@@ -20,15 +20,6 @@ open class IAPHelper : NSObject  {
         }else{
             self.productIdentifiers = IAPHelper.getProductIdentifiers()
         }
-        for productIdentifier in self.productIdentifiers {
-          let purchased = UserDefaults.standard.bool(forKey: productIdentifier)
-          if purchased {
-            purchasedProductIdentifiers.insert(productIdentifier)
-            print("Previously purchased: \(productIdentifier)")
-          } else {
-            print("Not purchased: \(productIdentifier)")
-          }
-        }
         super.init()
     }
 }
@@ -39,7 +30,6 @@ extension IAPHelper {
         //TODO 商品の追加や修正があった時のためにサーバーから取得
         return [
             "jp.co.ixit.iap.test.consumable",
-            "jp.co.ixit.iap.test.sub.weekly",
             "jp.co.ixit.iap.test.sub.monthly"
         ]
     }
@@ -207,6 +197,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
             if result {
                 //TODO テスト　この分岐に入る前に通信をOFFにして再度起動した際にこの分岐に入れば、
                 //独自にリトライ実装しなくて良い
+                //contents取得
                 SKPaymentQueue.default().finishTransaction(transaction)
                 self.deliverPurchaseNotificationFor(identifier: transaction.payment.productIdentifier)
             }else{
@@ -221,6 +212,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
     private func restore(transaction: SKPaymentTransaction) {
         guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
         print("restore... \(productIdentifier)")
+        //contents取得
         deliverPurchaseNotificationFor(identifier: productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
     }
@@ -246,8 +238,6 @@ extension IAPHelper: SKPaymentTransactionObserver {
         guard let identifier = identifier else { return }
 
         purchasedProductIdentifiers.insert(identifier)
-        UserDefaults.standard.set(true, forKey: identifier)
-        UserDefaults.standard.synchronize()
         NotificationCenter.default.post(name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification), object: identifier)
     }
     

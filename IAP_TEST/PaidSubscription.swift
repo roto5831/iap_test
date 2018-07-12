@@ -7,6 +7,8 @@ private let dateFormatter: DateFormatter = {
     return formatter
 }()
 
+/// 購読済オブジェクト
+/// いらなかったら削除
 public struct PaidSubscription {
     
     public let productId: String

@@ -1,11 +1,13 @@
 import Foundation
 
+
+/// レシート送信毎に発行されるセッション　いらなかったら削除
 public struct Session {
     public let id: SessionId
     public var paidSubscriptions: [PaidSubscription]
     
     public var currentSubscription: PaidSubscription? {
-        let activeSubscriptions = paidSubscriptions.filter { $0.isActive && $0.purchaseDate >= ReceiptHelper.shared.simulatedStartDate }
+        let activeSubscriptions = paidSubscriptions.filter { $0.isActive}
         let sortedByMostRecentPurchase = activeSubscriptions.sorted { $0.purchaseDate > $1.purchaseDate }
         
         return sortedByMostRecentPurchase.first
@@ -22,6 +24,7 @@ public struct Session {
         if let receipt = parsedReceipt["receipt"] as? [String: Any], let purchases = receipt["in_app"] as? Array<[String: Any]> {
             var subscriptions = [PaidSubscription]()
             for purchase in purchases {
+                //消費型は弾かれている
                 if let paidSubscription = PaidSubscription(json: purchase) {
                     subscriptions.append(paidSubscription)
                 }

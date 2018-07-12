@@ -57,14 +57,6 @@ class ProductCell: UITableViewCell {
     }
   }
   
-  override func prepareForReuse() {
-    super.prepareForReuse()
-    
-    textLabel?.text = ""
-    detailTextLabel?.text = ""
-    accessoryView = nil
-  }
-  
   func newBuyButton() -> UIButton {
     let button = UIButton(type: .system)
     button.setTitleColor(tintColor, for: UIControlState())
