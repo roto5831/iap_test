@@ -28,25 +28,25 @@ class MasterViewController: UITableViewController {
     var products = [SKProduct]()
 
     override func viewDidLoad() {
-    super.viewDidLoad()
+        super.viewDidLoad()
+        enabledExclusiveTouch()
+        title = "Iap Test"
 
-    title = "Iap Test"
+        refreshControl = UIRefreshControl()
+        refreshControl?.addTarget(self, action: #selector(MasterViewController.reload), for: .valueChanged)
 
-    refreshControl = UIRefreshControl()
-    refreshControl?.addTarget(self, action: #selector(MasterViewController.reload), for: .valueChanged)
+        let restoreButton = UIBarButtonItem(title: "Restore",
+                                            style: .plain,
+                                           target: self,
+                                           action: #selector(MasterViewController.restoreTapped(_:)))
+        navigationItem.rightBarButtonItem = restoreButton
 
-    let restoreButton = UIBarButtonItem(title: "Restore",
-                                        style: .plain,
-                                       target: self,
-                                       action: #selector(MasterViewController.restoreTapped(_:)))
-    navigationItem.rightBarButtonItem = restoreButton
-
-    NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.handlePurchaseNotification(_:)),
-                                                               name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
-                                                             object: nil)
-    NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.handlePurchaseFailNotification(_:)),
-                                           name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseFailNotification),
-                                           object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.handlePurchaseNotification(_:)),
+                                                                   name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseNotification),
+                                                                 object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(MasterViewController.handlePurchaseFailNotification(_:)),
+                                               name: NSNotification.Name(rawValue: IAPHelper.IAPHelperPurchaseFailNotification),
+                                               object: nil)
     }
   
     override func viewDidAppear(_ animated: Bool) {
@@ -81,12 +81,16 @@ class MasterViewController: UITableViewController {
           guard product.productIdentifier == productID else { continue }
             DispatchQueue.main.async {
                 self.tableView.reloadRows(at: [IndexPath(row: index, section: 0)], with: .fade)
+                self.makeVisibleCelleAccessories(enabled: true)
             }
         }
     }
     
     @objc func handlePurchaseFailNotification(_ notification: Notification) {
+        self.makeVisibleCelleAccessories(enabled: true)
     }
+    
+    
 }
 
 // MARK: - UITableViewDataSource
@@ -114,8 +118,38 @@ extension MasterViewController {
   }
 }
 
+// MARK: -
+extension MasterViewController {
+    /// 同時タップ制御
+    func enabledExclusiveTouch() {
+        view.subviews.forEach {
+            $0.isExclusiveTouch = true
+        }
+        navigationController?.navigationBar.subviews.forEach {
+            $0.isExclusiveTouch = true
+        }
+        tabBarController?.tabBar.subviews.forEach {
+            $0.isExclusiveTouch = true
+        }
+    }
+    
+    /// セル内ボタン活性、非活性　連打防止
+    ///
+    /// - Parameter enabled:
+    func makeVisibleCelleAccessories(enabled:Bool){
+        tableView.visibleCells.forEach{cell in
+            if let cell = cell as? ProductCell{
+                cell.makeAccessory(enabled: enabled)
+            }
+        }
+    }
+}
+
+
 // MARK: - SimpleAlertHelperDelegate
 extension MasterViewController: SimpleAlertHelperDelegate {
     func didTapOKButton() {
     }
 }
+
+

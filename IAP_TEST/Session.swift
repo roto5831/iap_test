@@ -21,6 +21,7 @@ public struct Session {
         self.receiptData = receiptData
         self.parsedReceipt = parsedReceipt
         
+        /// in_app もしくは latest_receipt_info
         if let receipt = parsedReceipt["receipt"] as? [String: Any], let purchases = receipt["in_app"] as? Array<[String: Any]> {
             var subscriptions = [PaidSubscription]()
             for purchase in purchases {

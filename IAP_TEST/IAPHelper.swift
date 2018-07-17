@@ -197,7 +197,7 @@ extension IAPHelper: SKPaymentTransactionObserver {
             if result {
                 //TODO テスト　この分岐に入る前に通信をOFFにして再度起動した際にこの分岐に入れば、
                 //独自にリトライ実装しなくて良い
-                //contents取得
+                //課金アイテムデータを取得
                 SKPaymentQueue.default().finishTransaction(transaction)
                 self.deliverPurchaseNotificationFor(identifier: transaction.payment.productIdentifier)
             }else{
@@ -210,9 +210,11 @@ extension IAPHelper: SKPaymentTransactionObserver {
     ///
     /// - Parameter transaction:
     private func restore(transaction: SKPaymentTransaction) {
+        //購入していると購読型の場合ここからIDが取得できる
+        //TODO 期限が切れている場合や購読期限終了している場合どうなる？
         guard let productIdentifier = transaction.original?.payment.productIdentifier else { return }
         print("restore... \(productIdentifier)")
-        //contents取得
+        //課金アイテムデータを取得
         deliverPurchaseNotificationFor(identifier: productIdentifier)
         SKPaymentQueue.default().finishTransaction(transaction)
     }
@@ -226,8 +228,12 @@ extension IAPHelper: SKPaymentTransactionObserver {
           if transactionError.code != SKError.paymentCancelled.rawValue {
             print("Transaction Error: \(String(describing: transaction.error?.localizedDescription))")
             deliverPurchaseFailNotificationFor(error: transaction.error)
+          }else{
+            print("cause: cancelled")
+            deliverPurchaseFailNotificationFor(error:nil)
           }
         }
+        
         SKPaymentQueue.default().finishTransaction(transaction)
     }
     

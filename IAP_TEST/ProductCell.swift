@@ -67,7 +67,12 @@ class ProductCell: UITableViewCell {
     return button
   }
   
-    @objc func buyButtonTapped(_ sender: AnyObject) {
+  @objc func buyButtonTapped(_ sender: UIButton) {
+    makeAccessory(enabled: false)
     buyButtonHandler?(product!)
+  }
+  
+  func makeAccessory(enabled:Bool){
+    accessoryView?.isUserInteractionEnabled = enabled
   }
 }
