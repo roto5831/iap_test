@@ -55,7 +55,7 @@ public class ReceiptHelper {
     }
     
     //TODO レシートをAppleに送信はサーバーサイド側でやる　クライアント側ではやらない
-    public func upload(receipt data: Data, completion: @escaping UploadReceiptCompletion) {
+    public func upload(url:URL? = nil,receipt data: Data, completion: @escaping UploadReceiptCompletion) {
         let body = [
             "receipt-data": data.base64EncodedString(),
             "password": itcAccountSecret
@@ -72,8 +72,12 @@ public class ReceiptHelper {
             Codeが上記以外の場合は、エラー処理へ
          参考：http://developer.wonderpla.net/entry/blog/engineer/ios_in-app-purchase/
          */
-        let url = URL(string: "https://sandbox.itunes.apple.com/verifyReceipt")!
-        var request = URLRequest(url: url)
+        var request:URLRequest!
+        if let url = url{
+            request = URLRequest(url:url)
+        }else{
+            request = URLRequest(url:URL(string: "https://sandbox.itunes.apple.com/verifyReceipt")!)
+        }
         request.httpMethod = "POST"
         request.httpBody = bodyData
         let task = URLSession.shared.dataTask(with: request) { (responseData, response, error) in
